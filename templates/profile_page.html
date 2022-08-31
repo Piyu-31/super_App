@@ -1,0 +1,143 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block profile_formTemp %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">My Profile</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">My Profile</a>
+                </li>
+              </ul>
+
+          </div>
+
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">My Info</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                      <table class="table table-hover table-head-bg-gray table-responsive-sm">
+                        <thead>
+                          <tr class="text-center">
+                                <th scope="col">Dealer ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Mobile #</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">State</th>
+                                <th scope="col">Zipcode</th>
+                            </tr>
+                        </thead>
+                        <tbody id="">
+                        {% if dealers_info %}
+                        {% for r in dealers_info %}
+                         <tr class="text-left">
+                            <td>{{r['dealer_id']}}</td>
+                            <td>{{r['first_name']}}</td>
+                            <td>{{r['last_name']}}</td>
+                            <td>{{r['contact_number']}}</td>
+                            <td>{{r['contact_email']}}</td>
+                            <td>{{r['address']}}</td>
+                            <td>{{r['city']}}</td>
+                            <td>{{r['country']}}</td>
+                            <td>{{r['state']}}</td>
+                            <td>{{r['zipcode']}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Employee Details</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                      <table class="table table-hover table-head-bg-gray table-responsive-sm">
+                        <thead>
+                          <tr class="text-center">
+                                <th scope="col">Employee ID</th>
+                                <th scope="col">Employee Type</th>
+                                <th scope="col">Employee Designation</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Mobile #</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">State</th>
+                                <th scope="col">Zipcode</th>
+                            </tr>
+                        </thead>
+                        <tbody id="">
+                        {% if emp_info %}
+                        {% for r in emp_info %}
+                         <tr class="text-left">
+                            <td>{{r['employee_id']}}</td>
+                            <td>{{r['employee_type']}}</td>
+                            <td>{{r['employee_designation']}}</td>
+                            <td>{{r['first_name']}}</td>
+                            <td>{{r['last_name']}}</td>
+                            <td>{{r['contact_number']}}</td>
+                            <td>{{r['contact_email']}}</td>
+                            <td>{{r['address']}}</td>
+                            <td>{{r['city']}}</td>
+                            <td>{{r['country']}}</td>
+                            <td>{{r['state']}}</td>
+                            <td>{{r['zipcode']}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      
+
+     	</div>
+  	</div>
+</div>
+
+
+
+
+{% endblock %}

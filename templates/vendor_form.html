@@ -1,0 +1,317 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block vendor_formTemp %}
+
+<link rel="stylesheet" href="../static/css/accordion.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-panel">
+	<div class="content">
+		<div class="page-inner">
+
+			<!-- --------------------------------------------breadcrump -->
+			<div class="page-header">
+				<h4 class="page-title">Supplier Database</h4>
+
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Communication & Status</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Supplier Database</a>
+					</li>
+
+				</ul>
+
+			</div>
+			<!-- --------------------------------------------breadcrump -->
+
+
+			<!-- -----------------------------------------------------content area -->
+	<div class="row">
+		<div class="col-md-12 ml-auto mr-auto">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">Supplier Book</div>
+				</div>
+
+				<div class="card-body">
+					<div id="accordion-nine" class="accordion accordion-active-header">
+						<div class="accordion__item">
+							<div class="accordion__header collapsed" data-toggle="collapse"
+							data-target="#active-header_collapseOne">
+							<span class="accordion__header--icon"></span>
+							<span class="accordion__header--text">Create</span>
+							<span class="accordion__header--indicator"></span>
+						</div>
+						<div id="active-header_collapseOne" class="collapse accordion__body"
+						data-parent="#accordion-nine">
+						<div class="accordion__body--text">
+							<div class="basic-form">
+								<form class="" method="POST" action="{{url_for('save_vendor_information')}}"id="ascf" name="wform">
+									{{form.csrf_token}}
+									<fieldset class="sec1 row">
+										<div class="input-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+											{{form.v_name(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+											{{form.v_inds(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_cname(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_cnumber(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_email(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_addrs(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_city(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_con(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_zip(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+											{{form.v_desc(class=formclass)}}
+										</div>
+
+									</fieldset>
+
+									<div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+										<button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+	</div>
+
+	<!-- =====================================search block -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+            <div class="card">
+              <div class="card-header">
+                  <div class="card-title">Search Block</div>
+              </div>
+
+              <div class="card-body">
+                  <div class="form-row">
+                    
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_vends_records/1">
+                          {{form_name.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_name.searchbyName(class=formclass)}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_vends_records/2">
+                          {{form_cname.csrf_token}}
+                          <div class="row">
+                            <div class="input-group ml-3 mr-1 mb-2">
+                              {{form_cname.searchbyCname(class=formclass)}}
+                              <div class="input-group-append">
+                                <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_vends_records/3">
+                          {{form_cnum.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_cnum.searchbyCnum(class=formclass)}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_vends_records/4">
+                          {{form_city.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_city.searchbyCity(class=formclass)}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    
+
+                  <div class="form-row">
+               		<div class="form-group col-md-3">
+                       <div class="basic-form">
+                       <a href="{{url_for('vendorWrapper')}}" method="GET" class="btn btn-primary btn-sm">All</a>
+                       </div>
+                   	</div>
+               </div>
+
+              </div>
+            </div>
+          </div>
+          </div>
+      	</div>
+
+		<div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Order Details</div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table header-border table-hover vertical-middle table-responsive-sm">
+                        <thead class="thead-light">
+                            <tr class="text-left">
+                                <th scope="col">Name</th>
+                                    <th scope="col">Industry</th>
+                                    <th scope="col">Contact Name</th>
+                                    <th scope="col">Contact Number</th>
+                                    <th scope="col">Contact Email</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Zip Code</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="order_data">
+                        	{% if vendorRecords %}
+                            {% for v in vendorRecords %}
+                            <tr class="text-center">
+                            	<td>{{v['vendor_name']}}</td>
+                                    <td>{{v['vendor_industry']}}</td>
+                                    <td>{{v['vendor_contact_name']}}</td>
+                                    <td>{{v['vendor_contact_number']}}</td>
+                                    <td>{{v['vendor_email_ids']}}</td>
+                                    <td>{{v['vendor_country']}}</td>
+                                    <td>{{v['vendor_address']}}</td>
+                                    <td>{{v['vendor_city']}}</td>
+                                    <td>{{v['vendor_zip_code']}}</td>
+                                    <td>{{v['vendor_description']}}</td>
+                                <td>
+                                    <div class="sweetalert row text-right">
+                                        <span>
+                                            <a href="/edit_vendor_data/{{v['vendor_id']}}" method="POST" class="ml-2"
+                                                data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                    class="fa fa-pencil color-muted"></i></a>
+
+                                                    
+                                            <!-- <a href="#"  data-toggle="modal" data-target="#collapse_deleteVendor{{v['vendor_id']}}}"><i class="fa fa-close text-danger color-danger"></i></a> -->
+
+                                            <a href="#" type="button" class="text text-danger ml-2" data-toggle="modal" data-target="#collapse_deleteVendor{{v['vendor_id']}}">
+                                              <i class="fa fa-close text-danger color-danger" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+                                            </a>
+                                            <div class="modal fade" id="collapse_deleteVendor{{v['vendor_id']}}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                </h5>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body text-left">
+                                                            Are you sure you want to permanently remove this item??
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-dark btn-sm"
+                                                                data-dismiss="modal">Close</button>
+                                                            <a href="/delete_a_vendor/{{v['vendor_id']}}" method="GET"
+                                                                class="btn btn-danger btn-sm">Confirm</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /# card -->
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+
+                       
+                    </table>
+                </div>
+                </div>
+                
+              </div>
+            </div>
+        </div>
+
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+  
+</script>
+
+{% endblock %}

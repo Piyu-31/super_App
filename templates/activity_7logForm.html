@@ -1,0 +1,156 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block activity7Log_formTemp %}
+
+<link rel="stylesheet" href="../static/css/accordion.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">Activity Logs</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Activity Logs</a>
+                </li>
+               
+              </ul>
+
+          	</div>
+          	<div class="row">
+				<div class="col-md-6">
+					<div class="card full-height">
+						<div class="card-header">
+							<div class="card-title">Activity Logs</div>
+						</div>
+						<div class="card-body">
+							<ol class="activity-feed">
+								{% for lg,cn in all_logs_cons_info %}
+								<li class="feed-item feed-item-info">
+									<time class="date" datetime="9-25">{{lg['current_log_datetime']}} &nbsp;{{cn['consumer_first_name']}} {{cn['consumer_last_name']}}</time>
+									<span class="text">{{cn['consumer_mobile_number']}} {{cn['consumer_email']}} <br/>
+
+										<h6>{{lg['message_plain_text']}}</h6>
+
+										<h6>Order Id - <a href="/editWForder/{{lg['nexus_id']}}" class="" style="color: blue;"><u>{{lg['nexus_id']}}</u></a></h6>
+
+										<div class="card-footer pl-0">
+                                            <div id="accordion-nine" class="accordion accordion-active-header">
+                                                <div class="accordion__item">
+                                                    <div class="accordion__header collapsed" data-toggle="collapse"
+                                                        data-target="#active-header_collapseOne">
+                                                        <span class="accordion__header--icon"></span>
+                                                        <span class="accordion__header--text">{{cn['work_flow_name']}}</span>
+                                                        <span class="accordion__header--indicator"></span>
+                                                    </div>
+                                                    <div id="active-header_collapseOne" class="collapse accordion__body"
+                                                        data-parent="#accordion-nine">
+                                                        <div class="accordion__body--text">
+
+                                                        	<div class="card border">
+							                                    <div class="card-header">
+							                                      <div class="card-title">Current Stage</div>
+							                                    </div>
+							                                    <div class="card-body">
+							                                      <ol class="activity-feed">
+							                                        {% for n in range(wfl_stages | length) %}
+							                                        
+							    
+							                                          {% if n | int < progress_stage_number | int %}
+							                                          <li class="feed-item feed-item-success text-decoration-none">
+							                                            <span class="text"><a href="#">{{wfl_stages[n]}}</a></span>                                
+							                                          </li>
+							                                        {% elif n | int == progress_stage_number | int %}
+							                                          <li class="feed-item feed-item-primary text-decoration-none font-weight-bold">
+							                                            <span class="text"><a href="#">{{wfl_stages[n]}}</a></span>                                
+							                                          </li>
+							                                          
+							                                        {% elif n | int > progress_stage_number | int %}
+							                                          <li class="feed-item feed-item-warning text-decoration-none">
+							                                            <!-- <time class="date" datetime="9-21">Sep 21</time> -->
+							                                            <span class="text"><a href="#">{{wfl_stages[n]}}</a></span>
+							                                          </li>
+							    
+							    
+							                                          <!-- <div class="timeline-badge warning"></div>
+							                                          <a class="timeline-panel text-muted" href="#">
+							                                            <span class="text"><b>{{wfl_stages[n]}}</b></span>
+							                                          </a> -->
+							                                        
+							                                          {% endif %}
+							                  
+							                                        
+							                                        {% endfor %}
+							                              
+							                                      </ol>
+							                                    </div>
+							                                  </div>
+
+							                                  <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+							                                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+							                                </div>
+							                                <div class="ps__rail-y" style="top: 0px; min-height: 150px; height: auto; right: 0px;">
+							                                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+							                                </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 pl-0" method="POST" action="/save_7action_taken_field/{{lg['nexus_id']}}" id="" name="wform">
+                                    <div class="row">
+
+		                                <div class="input-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		                                	<select class="form-control form-control" id="act_4taken" name="act_4taken">
+		                                		<option>Action Taken</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+		                                </div>
+		                                <div class="form-group col-lg-4 text-left">
+                                            <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                                        </div>
+                                    </div>
+		                            </form>
+								</li>
+								{% endfor %}
+								
+							</ol>
+						</div>
+
+						<div class="">
+		                    <div class="col-lg-2 col-md-2 mb-4">
+		                        <a href="{{url_for('WF_orderWrapper')}}" method="GET" class="btn btn-outline-dark btn-sm"
+		                        data-toggle="tooltip" data-placement="top" title="Go back"><i class="fa fa-arrow-left"></i>&nbsp;Go Back</a>
+		                            
+		                     </div>
+		                </div>
+					</div>
+				</div>
+						
+			</div>
+      	</div>
+  	</div>
+</div>
+
+
+
+{% endblock %}

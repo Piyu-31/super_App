@@ -1,0 +1,115 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block view_reviewTemp %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">Details</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">View Reviews</a>
+                </li>
+              </ul>
+
+          </div>
+
+            <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Details</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                      <table class="table table-hover table-head-bg-gray table-responsive-sm">
+                        <thead>
+                          <tr class="text-center">
+                                <th scope="col">Consumer Name/Company</th>
+                                <th scope="col">Consumer Last Name</th>
+                                <th scope="col">Consumer Mobile #</th>
+                                <th scope="col">Consumer Email</th>
+                                <th scope="col">Consumer City</th>
+                                <th scope="col">Consumer State</th>
+                                <th scope="col">Consumer Feedback</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if all_consumer_data %}
+                            {% for r in all_consumer_data %}
+                            <tr class="text-center">
+                                <td>{{r['consumer_first_name']}}</td>
+                                <td>{{r['consumer_last_name']}}</td>
+                                <td>{{r['consumer_mobile_number']}}</td>
+                                <td>{{r['consumer_email']}}</td>
+                                <td>{{r['city']}}</td>
+                                <td>{{r['state']}}</td>
+                                <td>{{cons_feddback}}</td>
+                            </tr>
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                  
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Product Review</div>
+                    </div>
+                    <div class="card-body">
+                        {% if service_review %}
+                        <form class="" method="POST" action="/activate_product_review/{{review_id}}_{{nexus_id}}_{{consumer_id}}"id="" name="wform">
+                            <div class="form-group col-lg-12 text-center mb-2 mt-2 pl-0">
+                                <button type="Submit" class="btn btn-primary btn-sm">Activate Product Review</button>
+                            </div>
+                        </form>
+
+                        {% else %}
+                        <p>Service review not submitted</p>
+
+                        {% endif %}
+                    </div>
+
+                  </div>
+
+
+              </div>
+          </div>
+      
+
+
+      </div>
+  </div>
+</div>
+
+
+
+</script>
+
+
+{% endblock %}

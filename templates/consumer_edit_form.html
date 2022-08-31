@@ -1,0 +1,136 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block consumer_EditformTemp %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+
+          <!-- --------------------------------------------breadcrump -->
+          <div class="page-header">
+              <h4 class="page-title">Consumer Details Edit </h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Consumer Details Edit</a>
+                </li>
+              </ul>
+
+          </div>
+          <!-- --------------------------------------------breadcrump -->
+
+
+          <!-- -----------------------------------------------------content area -->
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Consumer Edit Info</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="basic-form">
+                        <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="/update_consumer_info/{{consumer_id}}" id="" name="wform">
+                            {{form.csrf_token}}
+
+                            <fieldset  class="row sec1">
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                  
+                                    {{form.c_user_type(class=formclass)}}
+                                </div>
+                                
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_fname(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_lname(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_mobile(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_email(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_dob(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_addrs(class=formclass)}}
+                                </div>
+
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.c_city(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12">
+
+                                    {{form.c_con(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12">
+
+                                    {{form.c_state(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                    
+                                    {{form.c_zip_code(class=formclass)}}
+                                </div>
+
+                                
+                            </fieldset>
+
+                            <div class="form-group col-lg-12 text-left mt-3">
+                                <button type="Submit" class="btn btn-primary btn-sm">Update</button>
+                                <a href="{{url_for('consumerWrapper')}}" method="GET" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left color-muted"></i> &nbsp;Go Back</a>
+                            </div>  
+                        </form>
+                    </div>
+                      
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+          <!-- -----------------------------------------------------content area -->
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}

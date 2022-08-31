@@ -1,0 +1,260 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block create_reviewTemp %}
+
+
+<link rel="stylesheet" href="../static/css/accordion.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+
+          <!-- --------------------------------------------breadcrump -->
+          <div class="page-header">
+              <h4 class="page-title">Reviews</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">My Reviews</a>
+                </li>
+              </ul>
+
+          </div>
+          <!-- --------------------------------------------breadcrump -->
+
+
+          <!-- -----------------------------------------------------content area -->
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Review URLs</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div id="accordion-nine" class="accordion accordion-active-header">
+                        <div class="accordion__item">
+                            <div class="accordion__header collapsed" data-toggle="collapse"
+                                data-target="#active-header_collapseOne">
+                                <span class="accordion__header--icon"></span>
+                                <span class="accordion__header--text">Create</span>
+                                <span class="accordion__header--indicator"></span>
+                            </div>
+                            <div id="active-header_collapseOne" class="collapse accordion__body"
+                                data-parent="#accordion-nine">
+                                <div class="accordion__body--text">
+
+                             <div class="tab-content tabcontent-border">
+                                <div id="navpills-1" class="tab-pane active">
+                                    <div class="pt-1">
+                                        <div class="basic-form row">
+                                        <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('save_review_links_settings')}}" id="" name="wform">
+                                            {{form_online_review_links.csrf_token}}
+
+                                            <fieldset  class="row sec1">
+
+                                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                                  {{form_online_review_links.rw_link_label(class=formclass)}}
+                                              </div>
+
+                                              <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                                {{form_online_review_links.rw_link_name(class=formclass)}}
+                                              </div>
+                                           
+                                            </fieldset>
+                                            <fieldset  class="row sec1">
+
+                                              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                                
+
+                                                  {{form_online_review_links.rw_link_url(class=formclass)}}
+                                              </div>
+                                          </fieldset>
+
+                                           
+                                            <div class="form-group col-lg-12 text-left mt-1 pl-0">
+                                                <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                                            </div>
+                                         
+
+                                            
+                                        </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table header-border table-hover vertical-middle table-responsive-sm">
+                      <thead class="thead-light">
+                          <tr class="text-center">
+                              
+                              <th scope="col">Review Link ID</th>
+                              <th scope="col">Review Label</th>
+                              <th scope="col">Review Name</th>
+                              <th scope="col">Review URL</th>
+                              <th scope="col">Action</th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                        {% if links_data %}
+                        {% for c in links_data %}
+                          <tr class="text-center">
+                              <td>{{c['review_link_id']}}</td>
+                              <td>{{c['review_link_label']}}</td>
+                              <td>{{c['review_link_name']}}</td>
+                              <td>{{c['review_link_url']}}</td>
+                              
+                              <td>
+                                  <div class="sweetalert row ">
+                                      <span>
+                                          <a href="/edit_review_link/{{c['review_link_id']}}" method="GET" class="ml-4 mr-2"
+                                              data-toggle="tooltip" data-placement="top" title="Edit">
+                                              <i class="fa fa-pencil color-muted"></i>
+                                            </a>
+
+
+                                           <a href="#" data-toggle="modal" data-target="#collapse_deleteReview{{c['review_link_id']}}">
+                                               <i class="fa fa-close text-danger" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+                                            </a>
+
+                                           <div class="modal fade" id="collapse_deleteReview{{c['review_link_id']}}" tabindex="-1"
+                                              role="dialog" aria-labelledby="exampleModalLabel"
+                                              aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                      <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                              </h5>
+                                                          <button type="button" class="close"
+                                                              data-dismiss="modal" aria-label="Close">
+                                                              <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                      </div>
+                                                      <div class="modal-body text-left">
+                                                          Are You Sure You Want to Delete this Review..
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                          <button type="button" class="btn btn-dark btn-sm"
+                                                              data-dismiss="modal">Close</button>
+                                                          <a href="/delete_review_link/{{c['review_link_id']}}" method="GET"
+                                                              class="btn btn-danger btn-sm">Confirm</a>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!-- /# card -->
+                                      </span>
+                                  </div>
+                              </td>
+                          </tr>
+                      </tbody>
+                      {% endfor %}
+                      {% endif %}
+                     
+                  </table>
+
+
+
+                      
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+
+
+
+
+
+
+
+          <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Reviews</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table header-border table-hover vertical-middle table-responsive-sm">
+                                <thead class="thead-light">
+                                    <tr class="text-center">
+                                        <th scope="col">Dealer ID</th>
+                                        <th scope="col">Review ID</th>
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Consumer ID</th>
+                                        <th scope="col">Service Star Ratings</th>
+                                        <th scope="col">Product Star Ratings</th>
+                                        <th scope="col">Consumer Name</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                	{% if review_list %}
+                                  {% for r in review_list %}
+                                    <tr class="text-center">
+                                        <td>{{r['dealer_id']}}</td>
+                                        <td>{{r['review_id']}}</td>
+                                        <td>{{r['nexus_id']}}</td>
+                                        <td>{{r['consumer_id']}}</td>
+                                        <td>{{r['service_review_stars']}}</td>
+                                        <td>{{r['product_review_stars']}}</td>
+                                        <td>{{r['consumer_first_name']}} {{r['consumer_last_name']}}</td>
+                                        
+                                        <td>
+                                            <div class="sweetalert row">
+                                                <span>
+                                                    <a href="/view_all_reviews/{{r['review_id']}}_{{r['nexus_id']}}_{{r['consumer_id']}}" method="GET" class="ml-4"
+                                                        data-toggle="tooltip" data-placement="top" title="View">View</a>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- -----------------------------------------------------content area -->
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}

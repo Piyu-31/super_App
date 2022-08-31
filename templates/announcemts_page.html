@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block announcemt_formTemp %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">Announcements</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Announcements</a>
+                </li>
+               
+              </ul>
+
+          </div>
+
+          	<div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Announcements</div>
+                    </div>
+                    <div class="card-body">
+                      <h6>This provides information about the changes that has been made or any sort of information related to the application.</h6>
+                        {% if accouncemts_info %}
+                        {% for r in accouncemts_info %}
+                                <div class="card">
+                                    <!-- <div class="card-header">
+                                        <h4 class="card-title"></h4>
+                                    </div> -->
+                                    <div class="card-body">
+                                        <h5>{{r['heading']}}</h5>
+                                        <h6>{{r['heading']}}</h6>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                      
+                    </div>
+
+                    <div class="">
+                      <div class="col-lg-2 col-md-2 mb-4">
+                        <a href="{{url_for('WF_orderWrapper')}}" method="GET" class="btn btn-outline-dark btn-sm"
+                        data-toggle="tooltip" data-placement="top" title="Go back"><i class="fa fa-arrow-left"></i>&nbsp;Go Back</a>
+                            
+                      </div>
+                    </div>
+                    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

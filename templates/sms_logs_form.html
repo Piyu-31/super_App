@@ -1,0 +1,92 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block sms_logsForm %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">SMS Logs</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">SMS Logs</a>
+                </li>
+               
+              </ul>
+
+          </div>
+
+          
+
+
+
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">SMS Logs</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                      <table class="table table-hover table-head-bg-gray table-responsive-sm">
+                        <thead>
+                          <tr class="text-left">
+                                <th scope="col">Consumer ID</th>
+                                <th scope="col">Nexus ID</th>
+                                <th scope="col">PO #</th>
+                                <th scope="col">Twilio SID</th>
+                                <th scope="col">Delivery Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if smsList %}
+                            {% for s in smsList%}
+                          <tr class="text-left">
+                            <td>{{s['consumer_id']}}</td>
+                            <td>{{s['nexus_id']}}</td>
+                            <td>{{s['po_number']}}</td>
+              							<td>{{s['twilio_sid']}}</td>
+              							<td>{{s['twilio_delivery_status']}}</td>
+                            <td>
+                                <span>
+                                    <a href="/delivery_status/{{s['twilio_sid']}}_{{s['nexus_id']}}" method="GET"
+                                    class="ml-5 pl-5" data-toggle="tooltip" data-placement="top"
+                                    title="Check">Check</a>
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+{% endblock %}

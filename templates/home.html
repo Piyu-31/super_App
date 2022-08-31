@@ -1,0 +1,203 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block Home_formTemp %}
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">Dashboard</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Dashboard</a>
+                </li>
+              </ul>
+          	</div>
+
+
+          	<div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                        <div class="card-header">
+                          <div class="card-title">Financial Metrics</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                        
+                            <div class="col-md-4">
+                                <div class="card card-dark bg-success-gradient">
+                                    <div class="card-body pb-0">
+                                        <div class="h1 fw-bold float-right"></div>
+                                        <h4 class="mb-2">DAILY REVENUE</h4>
+                                        <h3>{{"$ {:,.2f}".format(sum_of_order_completed_prices_today)}}</h3>
+                                        <div class="pull-in sparkline-fix chart-as-background">
+                                            <div id="lineChart3"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card card-dark bg-secondary-gradient">
+                                    <div class="card-body pb-0">
+                                        <div class="h1 fw-bold float-right"></div>
+                                        <h4 class="mb-2">MTD REVENUE</h4>
+                                        <h3>{{"$ {:,.2f}".format(sum_of_order_completed_prices_month|float)}}</h3>
+                                        <div class="pull-in sparkline-fix chart-as-background">
+                                            <div id="lineChart2"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card card-dark bg-primary-gradient">
+                                    <div class="card-body pb-0">
+                                        <div class="h1 fw-bold float-right"></div>
+                                        <h4 class="mb-2">YTD REVENUE</h4>
+                                        <h3>{{"$ {:,.2f}".format(sum_of_order_completed_prices_year|float)}}</h3>
+                                        <div class="pull-in sparkline-fix chart-as-background">
+                                            <div id="lineChart"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        
+                      
+                        </div>
+                    
+                    </div>
+                </div>
+             </div>
+
+             <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Open orders Stats</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card card-primary bg-primary-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">ORDER ENTRY - TODAY</h4>
+                                        <h1 class="mb-4 fw-bold">{{"$ {:,.2f}".format(sum_of_order_entered_prices_today|float)}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card card-primary bg-warning-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">ORDER ENTRY COUNT-TODAY</h4>
+                                        <h1 class="mb-4 fw-bold">{{order_val_cur_entred_today_count}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card card-primary bg-secondary-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">TOTAL OPEN ORDERS</h4>
+                                        <h1 class="mb-4 fw-bold">{{"$ {:,.2f}".format(sum_of_all_price|float)}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card card-primary bg-success-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">OPEN ORDER COUNT</h4>
+                                        <h1 class="mb-4 fw-bold">{{open_orders_count}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        
+
+                        </div>
+                      
+                    </div>
+                    
+                  </div>
+              </div>
+            </div>
+
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Monthly Usage</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card card-primary bg-info-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">SMS COUNT</h4>
+                                        <h1 class="mb-4 fw-bold">{{sms_count}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card card-primary bg-danger-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">EMAIL COUNT</h4>
+                                        <h1 class="mb-4 fw-bold">{{emails_count}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card card-primary bg-success-gradient">
+                                    <div class="card-body">
+                                        <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">TOTAL COUNT</h4>
+                                        <h1 class="mb-4 fw-bold">{{total_logs_count}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        
+                      
+                    </div>
+                    
+                  </div>
+              </div>
+          </div>
+
+          	
+        
+
+
+
+        </div>
+    </div>
+</div>
+
+    <!-- Chart JS -->
+
+
+
+
+
+
+
+{% endblock %}

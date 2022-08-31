@@ -1,0 +1,123 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block communication_form %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+
+          <!-- --------------------------------------------breadcrump -->
+          <div class="page-header">
+              <h4 class="page-title">Log Book</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">My Order</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Logbook</a>
+                </li>
+              </ul>
+
+          </div>
+          <!-- --------------------------------------------breadcrump -->
+
+
+          <!-- -----------------------------------------------------content area -->
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">One-on-One Communication</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="basic-form">
+                        <form class="" method="POST" action="/wf_save_logs/{{n_id}}/{{po_no}}/{{wf_type}}"id="ascf" name="wform">
+                            {{form_wf_comm.csrf_token}}
+                            <fieldset class="sec1 row">
+                            	<div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-2">
+                                    {{form_wf_comm.subject(class=formclass)}}
+                                </div>
+
+                                <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-2">
+                                    {{form_wf_comm.send_type(class=formclass)}}
+                                </div>
+                                
+                            </fieldset>
+                            <fieldset  class="sec1">
+                                <div class="row">
+                                    <div class="input-group col-lg-12  col-md-12 col-sm-12 col-xs-12 mr-0">
+                                    {{form_wf_comm.msg(class=formclass)}}
+                                    </div>
+                                </div>
+							</fieldset>
+							 <div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+                            	<button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                        	</div>
+                        </form>
+                        </div>
+                      
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+
+
+
+          <div class="row">
+              <div class="col-lg-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Log Book</div>
+                    </div>
+                    <div class="card-body">
+                      <ol class="activity-feed">
+                      {% for i in log_recs | reverse %}
+                          <li class="feed-item feed-item-success text-decoration-none">
+                            <a class="timeline-panel text-muted" href="#">
+                              <span>{{i['logger_name']}} - {{i['current_log_datetime']}}
+                                  <span class="badge badge-pill text-primary break-class">{{i['subject']}}</span>
+                              </span>
+                                  <h6 class="m-t-5 text-dark"><b>{{i['message_plain_text']}}</b></h6>
+                              </a>                               
+                          </li>
+                          
+                          {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                
+              </div>
+          </div>
+          <!-- -----------------------------------------------------content area -->
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}
