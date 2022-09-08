@@ -1,0 +1,1064 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block DOl_wf_formTemp %}     
+
+<link rel="stylesheet" href="../static/css/accordion.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-panel">
+    <div class="content">
+        <div class="page-inner">
+
+          <!-- --------------------------------------------breadcrump -->
+          <div class="page-header">
+              <h4 class="page-title">Workflow Orders</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Workflow Order</a>
+                </li>
+              </ul>
+
+          </div>
+          <!-- --------------------------------------------breadcrump -->
+
+
+          <!-- -----------------------------------------------------content area -->
+
+          <!-- ============================Workflow order entry -->
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Work Flow Order Entry</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div id="accordion-nine" class="accordion accordion-active-header">
+                        <div class="accordion__item">
+                            <div class="accordion__header collapsed" data-toggle="collapse"
+                                data-target="#active-header_collapseOne">
+                                <span class="accordion__header--icon"></span>
+                                <span class="accordion__header--text">Single Order</span>
+                                <span class="accordion__header--indicator"></span>
+                            </div>
+                            <div id="active-header_collapseOne" class="collapse accordion__body"
+                                data-parent="#accordion-nine">
+                                <div class="accordion__body--text">
+                                    
+                                
+
+                             <div class="tab-content tabcontent-border">
+                             
+                                    
+                                        <div class="basic-form row">
+                                        <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('save_work_flow_order_records')}}" id="" name="wform">
+                                            {{form_wrk_flw_order.csrf_token}}
+
+                                            <fieldset  class="row sec1">
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                                {{form_wrk_flw_order.j_name(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                              
+                                                {{form_wrk_flw_order.po_no(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2" data-toggle="tooltip" data-placement="top" title="Enter Order Date">
+                                              
+                                                {{form_wrk_flw_order.or_date(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.user_type(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                {{form_wrk_flw_order.co_fname(onkeypress="return alphabet(event);", class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                {{form_wrk_flw_order.co_lname(onkeypress="return alphabet(event);", class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                {{form_wrk_flw_order.co_mo_num(onkeypress="return isNumberKey(event);", class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.co_email(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.address(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.ci_ty(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-2 col-md-3 pt-2">
+                                                <div class="form-check">
+                                                  <label class="form-check-label">
+                                                    {{form_wrk_flw_order.country_2(onclick="myConFunction()", class="form-check-input")}}
+                                                    <span class="form-check-sign">US</span>
+                                                  </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-lg-2 col-md-3 pt-2">
+                                                    <div class="form-check">
+                                                      <label class="form-check-label" style="color:black;">
+                                                        {{form_wrk_flw_order.country_1(onclick="myConFunction()", class="form-check-input")}}
+                                                        <span class="form-check-sign">Canada</span>
+                                                        </label>
+                                                    </div>
+                                            </div>
+
+                                            <div class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2 d-none" id="caNstates"  >
+                                                {{form_wrk_flw_order.ca_States(class=formclass)}}
+                                                
+                                            </div>
+
+                                            <div class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2 d-none" id="uSstates"  >
+                                               {{form_wrk_flw_order.us_States(class=formclass)}}
+                                            </div>
+                
+                                            <div class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2 d-flex" id="empty_field" >
+                                                {{form_wrk_flw_order.emp_fld(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.zip_code(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                    {{form_wrk_flw_order.br_and(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                {{form_wrk_flw_order.wf_type(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.mdl(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                {{form_wrk_flw_order.totl_lt(onkeypress="return isNumberKey(event);", class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">    
+                                                {{form_wrk_flw_order.delr_bfr_tm(onkeypress="return isNumberKey(event);", class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form_wrk_flw_order.siz(class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                {{form_wrk_flw_order.or_price(onkeypress="return isDecimalKey(event);", class=formclass)}}
+                                            </div>
+                                            
+                                            <div class="input-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                {{form_wrk_flw_order.or_cost(onkeypress="return isDecimalKey(event);", class=formclass)}}
+                                            </div>
+
+                                            <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+
+                                                {{form_wrk_flw_order.o_notes(class=formclass)}}
+                                            </div>
+                                            </fieldset>
+
+                                            {% if entry_msg_list %}
+                                            <div class="card border mt-2">
+
+                                            <div class="card-header">
+                                                <h4 class="card-title">SMS Preview</h4>
+                                            </div>
+
+                                            <div class="card-body">
+                                            <p>
+                                            <i class="fa fa-quote-left text-lightGray" aria-hidden="true"></i>&nbsp;<i>
+                                            <button type="button" class="btn btn-square btn-outline-light text-dark break-class" data-toggle="tooltip" data-placement="top" title="Subject">
+
+                                                {% if entry_msg_list[0]["create_order_text_box_1"] == '' %}
+                                                ______
+
+                                                {% else %}
+                                                <u>{{entry_msg_list[0]["create_order_text_box_1"]}}</u>
+                                                {% endif %}
+                                                                        </button>
+                                                                        <i class="text-lightGray ">&#40; Order# abcd1234 &#41; </i>
+                                            
+                                            <button type="button" class="btn btn-square btn-outline-light text-dark break-class" data-toggle="tooltip" data-placement="top" title="Salutation">
+                                            
+                                            {% if entry_msg_list[0]["create_order_text_box_2"] == '' %}
+                                                ______
+
+                                                {% else %}
+                                                <u>{{entry_msg_list[0]["create_order_text_box_2"]}}</u>
+                                                {% endif %}
+                                            
+                                            </button>
+                                            <i class="text-lightGray ">&#40; Estimated Delivery Date - 11/07/2021 &#41;</i>
+                                            
+                                            <button type="button" class="btn btn-square btn-outline-light text-dark break-class" data-toggle="tooltip" data-placement="top" title="Message">
+                                            
+                                            {% if entry_msg_list[0]["create_order_text_box_3"] == '' %}
+                                                ______
+
+                                                {% else %}
+                                                <u>{{entry_msg_list[0]["create_order_text_box_3"]}}</u>
+                                                {% endif %}
+                                            </button>
+                                            <i class="text-lightGray ">&#40;Customer app short-link for nexus field service &#41;</i>
+                                            
+                                            <button type="button" class="btn btn-square btn-outline-light text-dark break-class" data-toggle="tooltip" data-placement="top" title="Regards">
+                                            {% if entry_msg_list[0]["create_order_text_box_4"] == '' %}
+                                                ______
+
+                                                {% else %}
+                                                <u>{{entry_msg_list[0]["create_order_text_box_4"]}}</u>
+                                                {% endif %}
+                                            </button>
+
+                                            </i>&nbsp;<i class="fa fa-quote-right text-lightGray" aria-hidden="true"></i>
+                                            </p>
+                                            </div>
+                                            </div>
+
+                                            {% endif %}
+
+
+                                            <div class="input-group col-lg-12 text-left mt-3 pl-0">
+                                                <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                                            </div>
+
+                                            
+                                        </form>
+                                        </div>
+                                        
+                                    
+                               
+                                <!-- {% if blk_upload == 'Yes' %} -->
+                                
+                                <!-- {% endif %} -->
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+
+
+          <!-- =====================================search block -->
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+            <div class="card">
+              <div class="card-header">
+                  <div class="card-title">Search Block</div>
+              </div>
+
+              <div class="card-body">
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_WForder_records/1">
+                          {{form_jobname.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_jobname.searchbyJobname(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_WForder_records/2">
+                          {{form_fname.csrf_token}}
+                          <div class="row">
+                            <div class="input-group ml-3 mr-1 mb-2">
+                              {{form_fname.searchbyFname(class_="form-control form-control-sm")}}
+                              <div class="input-group-append">
+                                <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_WForder_records/3">
+                          {{form_lname.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_lname.searchbyLname(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                          <form class="mr-3" method="POST" action="/search_WForder_records/4">
+                          {{form_po.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_po.searchbyPonumber(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                      <form class="mr-3" method="POST" action="/search_WForder_records/5">
+                          {{form_city.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_city.searchbyCity(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                      <form class="mr-3" method="POST" action="/search_WForder_records/6">
+                          {{form_wftype.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_wftype.searchbyWfType(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div class="basic-form">
+                      <form class="mr-3" method="POST" action="/search_WForder_records/7">
+                          {{form_state.csrf_token}}
+                        <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_state.searchbyState(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                       <div class="basic-form">
+                       <form class="mr-3" method="POST" action="/search_WForder_records/8">
+                           {{form_daterange.csrf_token}}
+                         <div class="row">
+                          <div class="input-group ml-3 mr-1 mb-2">
+                            {{form_daterange.searchbyFromdate(class_="form-control form-control-sm")}}
+                            {{form_daterange.searchbyTodate(class_="form-control form-control-sm")}}
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                          </div>
+                         </div>
+                       </form>
+                       </div>
+                   </div>
+                  </div>
+
+
+                  
+
+                  <div class="form-row">
+                    
+
+
+                    <div class="form-group col-md-3">
+                       <div class="basic-form">
+                            <form class="mr-3" method="POST" action="/search_WForder_records/9">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary btn-sm">All</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                   
+               </div>
+
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+          <!-- ======================================Order details -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Order Details</div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table header-border table-hover vertical-middle table-responsive-sm">
+                        <thead class="thead-light">
+                            <tr class="text-center">
+                                <th>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="check_all" name="check_all" onclick="checkAll(this)" value="" class="form-check-input" >                                        
+                                        <span class="form-check-sign"></span>
+                                      </label>
+                                    <!-- <input type="checkbox" id="check_all" name="check_all" onclick="checkAll(this)" class="form-check-input" > -->
+                                  </div>
+                                </th>
+
+                                {% if empList[0]['order_id']=='True' %}
+                                    <th scope="col">Order #</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['po_number']=='True' %}
+                                    <th scope="col">PO #</th>
+                                {% endif %}
+
+                                {% if empList[0]['order_date']=='True' %}
+                                <th scope="col">Order Date</th>
+                                {% endif %}
+                               
+                                {% if empList[0]['work_flow_name']=='True' %}
+                                <th scope="col">WorkFlow Name</th>
+                                {% endif %}
+
+                                {% if empList[0]['order_value']=='True' %}
+                                    <th scope="col">Order Value</th>
+                                {% endif %}
+
+                                {% if empList[0]['order_cost']=='True' %}
+                                    <th scope="col">Order Cost</th>
+                                {% endif %}
+
+                                {% if empList[0]['model']=='True' %}
+                                    <th scope="col">Model</th>
+                                {% endif %}
+
+                                {% if empList[0]['size']=='True' %}
+                                    <th scope="col">Size</th>
+                                {% endif %}
+
+                                {% if empList[0]['job_name']=='True' %}
+                                    <th scope="col">Job Name</th>
+                                {% endif %}
+
+                                {% if empList[0]['user_type']=='True' %}
+                                    <th scope="col">User Type</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['consumer_first_name']=='True' %}
+                                    <th scope="col">First Name/Company</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['consumer_last_name']=='True' %}
+                                    <th scope="col">Last Name</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['country']=='True' %}
+                                    <th scope="col">Country</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['state']=='True' %}
+                                    <th scope="col">State</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['address']=='True' %}
+                                    <th scope="col">Address</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['city']=='True' %}
+                                    <th scope="col">City</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['consumer_mobile_number']=='True' %}
+                                    <th scope="col">Mobile No</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['consumer_email']=='True' %}
+                                    <th scope="col">Email</th>
+                                {% endif %}
+
+                                {% if empList[0]['zip_code']=='True' %}
+                                    <th scope="col">Zipcode</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['brand']=='True' %}
+                                    <th scope="col">Brand</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['total_lead_time']=='True' %}
+                                    <th scope="col">Total Lead Time</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['dealer_buffer_time']=='True' %}
+                                    <th scope="col">Dealer Buffer Time</th>
+                                {% endif %}
+                                
+                                {% if empList[0]['est_deliver_time']=='True' %}
+                                    <th scope="col">Estimated Delivery Time</th>
+                                {% endif %}
+
+                                {% if empList[0]['order_notes']=='True' %}
+                                    <th scope="col">Order Notes</th>
+                                {% endif %}
+
+                                {% if empList[0]['last_activity']=='True' %}
+                                    <th scope="col">Last Activity</th>
+                                {% endif %}
+
+                                {% if empList[0]['order_completion_date']=='True' %}
+                                    <th scope="col">Order Completion Date</th>
+                                {% endif %}
+                                
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="order_data">
+                            {{form_checkbox.csrf_token}}
+                            
+                            {% if wfDol_list %}
+                             
+                             {% for d,chkbx in form_info | reverse %}
+                            <tr class="text-center">
+                                <td>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        {{chkbx(id=d['nexus_id'],onclick="manageCheckedItems(this)", class="form-check-input")}}
+                                        <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </td>
+
+                                {% if empList[0]['order_id']=='True' %}
+                                    <td><a href="/editWForder/{{d['nexus_id']}}" method="POST" class=""
+                                                data-toggle="tooltip" data-placement="top" title="Edit">{{d["nexus_id"]}}</a>
+
+
+
+                                    </td>
+                                {% endif %}
+                                
+                                {% if empList[0]['po_number']=='True' %}
+                                    <td>{{d["po_number"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['order_date']=='True' %}
+                                    <td>{{d["order_date"]}}</td>
+                                {% endif %}
+
+
+                                {% if empList[0]['work_flow_name']=='True' %}
+                                    <td>{{d["work_flow_name"]}}</td>
+                                {% endif %}
+
+
+                                {% if empList[0]['order_value']=='True' %}
+                                    <td>{{"${:,.2f}".format(d["order_price"]|float)}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['order_cost']=='True' %}
+                                    <td>{{"${:,.2f}".format(d["order_cost"]|float)}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['model']=='True' %}
+                                    <td>{{d["model"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['size']=='True' %}
+                                    <td>{{d["size"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['job_name']=='True' %}
+                                    <td>{{d["job_name"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['user_type']=='True' %}
+                                    <td>{{d["user_type"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['consumer_first_name']=='True' %}
+                                    <td>{{d["consumer_first_name"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['consumer_last_name']=='True' %}
+                                    <td>{{d["consumer_last_name"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['country']=='True' %}
+                                    <td>{{d["country"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['state']=='True' %}
+                                    <td>{{d["state"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['address']=='True' %}
+                                    <td>{{d["address"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['city']=='True' %}
+                                    <td>{{d["city"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['consumer_mobile_number']=='True' %}
+                                    <td>{{d["consumer_mobile_number"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['consumer_email']=='True' %}
+                                    <td>{{d["consumer_email"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['zip_code']=='True' %}
+                                    <td>{{d["consumer_zip_code"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['brand']=='True' %}
+                                    <td>{{d["brand"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['total_lead_time']=='True' %}
+                                    <td>{{d["total_lead_time"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['dealer_buffer_time']=='True' %}
+                                    <td>{{d["dealer_buffer_time"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['est_deliver_time']=='True' %}
+                                    <td>{{d["est_deliver_time"]}}</td>
+                                {% endif %}
+
+                                {% if empList[0]['order_notes']=='True' %}
+                                    <th scope="col">{{d["order_notes"]}}</th>
+                                {% endif %}
+
+                                {% if empList[0]['last_activity']=='True' %}
+                                    <th scope="col">{{d["last_activity"]}}</th>
+                                {% endif %}
+
+                                {% if empList[0]['order_completion_date']=='True' %}
+                                    <th scope="col">{{d["order_completion_date"]}}</th>
+                                {% endif %}                    
+                                
+                                <td>
+                                    <div class="sweetalert row">
+                                        <span>
+                                            <!-- <a href="/editWForder/{{d['nexus_id']}}" method="POST" class=""
+                                                data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                    class="fa fa-pencil color-muted"></i></a> &nbsp; -->
+
+                                            <a href="#" data-toggle="modal" data-placement="top" title="Delete" data-target="#collapse_deleteOrder{{d['nexus_id']}}">
+                                              <i class="fa fa-close text-danger color-danger" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+                                            </a> &nbsp;
+
+                                            <div class="modal fade" id="collapse_deleteOrder{{d['nexus_id']}}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                </h5>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to permanently remove this item??
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-dark btn-sm"
+                                                                data-dismiss="modal">Close</button>
+                                                            <a href="/deleteWFOrder/{{d['nexus_id']}}/{{d['po_number']}}/{{d['work_flow_name']}}/{{d['order_price']}}/{{d['consumer_mobile_number']}}" method="GET"
+                                                                class="btn btn-danger btn-sm">Confirm</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                           <a href="/wf_communication_log/{{d['nexus_id']}}_{{d['po_number']}}_{{d['work_flow_name']}}" method="POST" class=""
+                                                data-toggle="tooltip" data-placement="top" title="Logbook"><i class="fa fa-book text-info color-info"></i></a> &nbsp;
+
+                                            <a href="/sms_logs_table/{{d['nexus_id']}}" method="GET" class=""
+                                                data-toggle="tooltip" data-placement="top" title="SMS Log"><i class="fa fa-comments text-primary"></i></a>
+                                            <!-- /# card -->
+                                            
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+
+                       
+                    </table>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Send Custom Message</div>
+                </div>
+
+                <div class="card-body">
+                  <div class="basic-form row">
+                    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('custm_messageWorkflowWrapper')}}" id="ascf" name="wform">
+                        {{form_redbtn.csrf_token}}
+                      <fieldset class="sec1">
+                        <div class="row">
+                            <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+                              {{form_redbtn.cstm_msg_ids(class_="form-control form-control-sm")}} 
+                            </div>
+                            
+                            <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2 ">
+                              {{form_redbtn.sub_ject(class_="form-control")}} 
+                            </div>
+                            
+                             <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2 ">
+                                {{form_redbtn.send_type(class_="form-control")}}       
+                             </div>
+                          </div>
+                        </fieldset>
+                        <fieldset  class="sec1">
+                            <div class="row">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                    {{form_redbtn.mail_subject(class_="form-control form-control-sm")}}
+                                    
+                                 </div>
+                              </div>
+                        </fieldset>
+                        <fieldset  class="sec1">
+                            <div class="row">
+                                <div class="form-group col-lg-12  col-md-12 col-sm-12 col-xs-12">
+                                    {{form_redbtn.msg(class_="form-control form-control-sm")}}
+                                    
+                                 </div>
+                              </div>
+                        </fieldset>
+                        <div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+                            <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                        </div>
+                            
+                          
+                    </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Lead-Time Change</div>
+                </div>
+
+                <div class="card-body">
+                  <div class="row">
+                    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 " method="POST" action="{{url_for('bulk_leadtime_updateWFWrapper')}}"id="ascf" name="wform">
+                        {{form_rbtnleadtime.csrf_token}}
+                      <fieldset class="sec1">
+                        <div class="row">
+                            <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+                              {{form_rbtnleadtime.cst_leadtm_ids(class_="form-control form-control-sm")}} 
+                            </div>
+                            
+                            <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+                              {{form_rbtnleadtime.cal_lead_type(class_="form-control")}} 
+                            </div>
+                            
+                             <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+                                {{form_rbtnleadtime.ttl_lt(class_="form-control form-control-sm")}}       
+                             </div>
+                          
+
+                          </div>
+
+                          
+                        </fieldset>
+                        <fieldset  class="sec1">
+                            <div class="row">
+                                <div class="form-group col-lg-12  col-md-12 col-sm-12 col-xs-12 mr-0">
+                                    {{form_rbtnleadtime.cst_leadtm_reason(class_="form-control form-control-sm")}}
+                                    
+                                 </div>
+                              </div>
+                        </fieldset>
+                        <div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+                            <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                        </div>
+                            
+                          
+                    </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Modify Buffer-Time</div>
+                </div>
+
+                <div class="card-body">
+                  <div class="row">
+                    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 " method="POST" action="{{url_for('bulk_buffertime_updateWFWrapper')}}"id="ascf" name="wform">
+                        {{form_rbtnbuffertime.csrf_token}}
+                      <fieldset class="sec1">
+                        <div class="row">
+
+                            <div class="input-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+                              {{form_rbtnbuffertime.cstm_bfrtm_ids(class_="form-control form-control-sm")}} 
+                            </div>
+                            
+                            <div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+                              {{form_rbtnbuffertime.cal_buffer_type(class=formclass)}} 
+                            </div>
+                            
+                             <div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+                                {{form_rbtnbuffertime.dlr_bfr_tm(class_="form-control form-control-sm")}}       
+                             </div>
+                          
+
+                          </div>
+                        </fieldset>
+                        <fieldset  class="sec1">
+                            <div class="row ">
+                                <div class="input-group col-lg-12  col-md-12 col-sm-12 col-xs-12 mr-0">
+                                    {{form_rbtnbuffertime.cst_bfrtm_reason(class_="form-control form-control-sm")}}
+                                    
+                                 </div>
+                              </div>
+                        </fieldset>
+                        <div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+                            <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                        </div>
+                            
+                          
+                    </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- -----------------------------------------------------content area -->
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+ 
+
+<script>
+    function myConFunction() {
+    var checkBox1 = document.getElementById("country_1");
+    var checkBox2 = document.getElementById("country_2");
+    var ca = document.getElementById("caNstates");
+    var us = document.getElementById("uSstates");
+    var emp_fld = document.getElementById("empty_field");    
+  
+    if (checkBox1.checked == true){
+      ca.required = true;
+      us.required = false;
+      emp_fld.classList.remove('d-flex');
+      emp_fld.classList.add('d-none');
+      ca.classList.remove('d-none');
+      ca.classList.add('d-flex');
+      checkBox2.disabled = true;
+    } else if (checkBox2.checked == true){
+      us.required = true;
+      ca.required = false;
+      us.classList.remove('d-none');
+      us.classList.add('d-flex');
+      emp_fld.classList.remove('d-flex');
+      emp_fld.classList.add('d-none');
+      checkBox1.disabled = true;
+      ca.style.display = "none";
+    } else {
+       checkBox1.disabled = false;
+       checkBox2.disabled = false;
+      us.classList.remove('d-flex');
+      us.classList.add('d-none');
+      ca.classList.remove('d-flex');
+      ca.classList.add('d-none');
+      emp_fld.classList.add('d-flex');
+    }
+  }
+  </script>
+  
+  
+
+
+<script>
+  red_button_ids = []
+  function manageCheckedItems(el) {
+     var txt = document.getElementById(el.id);
+     var cstm_txt = document.getElementById('cstm_msg_ids');
+     var cstm_lead_txt = document.getElementById('cst_leadtm_ids');
+     var cstm_bfr_txt = document.getElementById('cstm_bfrtm_ids');
+
+     
+
+      if(el.checked) {
+          red_button_ids.push(el.id);
+          cstm_txt.value = red_button_ids;
+          cstm_lead_txt.value = red_button_ids;
+          cstm_bfr_txt.value = red_button_ids;
+
+      }
+      else{
+          if (red_button_ids.includes(el.id)){
+              const id_index = red_button_ids.indexOf(el.id);
+              if (id_index > -1) {
+                  red_button_ids.splice(id_index, 1);
+              }
+              cstm_txt.value = red_button_ids;
+              cstm_lead_txt.value = red_button_ids;
+              cstm_bfr_txt.value = red_button_ids;
+          }
+      }
+      var ids = document.getElementById('order_data').getElementsByTagName('input');
+      var new_ids = Object.entries(ids);
+
+      if (red_button_ids.length < (new_ids.length-1)){
+          var selectAll = document.getElementById('check_all');
+          selectAll.checked = false;
+
+      }
+
+  }
+
+  function checkAll(obj){
+      red_button_ids = [];
+      var ids = document.getElementById('order_data').getElementsByTagName('input');
+      var cstm_txt = document.getElementById('cstm_msg_ids');
+      var cstm_lead_txt = document.getElementById('cst_leadtm_ids');
+      var cstm_bfr_txt = document.getElementById('cstm_bfrtm_ids');
+
+      
+      if(obj.checked) {
+          var ids = document.getElementById('order_data').getElementsByTagName('input');
+          
+          var new_ids = Object.entries(ids);
+          
+          for (let i = 1; i < new_ids.length; ++i) {
+              red_button_ids.push(new_ids[i][1].id);
+
+              if (document.getElementById(new_ids[i][1].id).checked) {
+
+                  document.getElementById(new_ids[i][1].id).checked = false;
+
+              }
+              document.getElementById(new_ids[i][1].id).checked = true;
+
+          }
+          cstm_txt.value = red_button_ids;
+          cstm_lead_txt.value = red_button_ids;
+          cstm_bfr_txt.value = red_button_ids;
+
+      }
+      else{
+          red_button_ids = [];
+          cstm_txt.value = red_button_ids;
+          cstm_lead_txt.value = red_button_ids;
+          cstm_bfr_txt.value = red_button_ids;
+          
+          var ids = document.getElementById('order_data').getElementsByTagName('input');
+          var new_ids = Object.entries(ids);
+
+          for (let i = 1; i < new_ids.length; ++i) {
+              
+              document.getElementById(new_ids[i][1].id).checked = false;
+
+          }
+
+
+      }
+
+  }
+</script>
+
+{% endblock %}

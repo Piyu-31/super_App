@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block edit_reviewTemp %}
+
+
+<div class="main-panel">
+	<div class="content">
+		<div class="page-inner">
+			<!-- --------------------------------------------breadcrump -->
+			<div class="page-header">
+				<h4 class="page-title">My Review</h4>
+
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Communication & Status</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">My Review</a>
+					</li>
+
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Review Edit</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 ml-auto mr-auto">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Review Edit</div>
+						</div>
+
+						<div class="card-body">
+							<div class="basic-form">
+								<form class="" method="POST" action="/update_review_link_info/{{link_id}}"id="ascf" name="wform">
+									{{form_online_review_links.csrf_token}}
+									<fieldset class="sec1 row">
+										<div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-2">
+											{{form_online_review_links.rw_link_name(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-2">
+											{{form_online_review_links.rw_link_label(class=formclass)}}
+										</div>
+									</fieldset>
+
+									<fieldset class="sec1 row">
+										<div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+											{{form_online_review_links.rw_link_url(class=formclass)}}
+										</div>
+									</fieldset>
+
+									<div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+										<button type="Submit" class="btn btn-primary btn-sm">Update</button>
+										
+										<a href="{{url_for('review_linksWrapper')}}" method="GET" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left color-muted"></i> &nbsp;Go Back</a>
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

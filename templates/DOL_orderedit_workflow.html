@@ -1,0 +1,614 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block DOl_wf_editformTemp %}
+
+
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+
+          <!-- --------------------------------------------breadcrump -->
+          <div class="page-header">
+              <h4 class="page-title">Order Summary</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Workflow Orders</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Order Summary</a>
+                </li>
+              </ul>
+
+          </div>
+          <!-- --------------------------------------------breadcrump -->
+
+
+          <!-- -----------------------------------------------------content area -->
+
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                  <div class="card card-stats card-round">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="icon-big text-center text-warning border-warning">
+                            <i class="fa fa-university"></i>
+                          </div>
+                        </div>
+                        <div class="col-8 col-stats">
+                          <div class="numbers">
+                            <p class="card-category">Supplier</p>
+                            <h4 class="card-title">{{brand}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                  <div class="card card-stats card-round">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="icon-big text-center text-success border-success">
+                            <i class="fas fa-dollar-sign text-success"></i>
+                          </div>
+                        </div>
+                        <div class="col-8 col-stats">
+                          <div class="numbers">
+                            <p class="card-category">Order Value</p>
+                            <h4 class="card-title">{{price}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                  <div class="card card-stats card-round">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="icon-big text-center text-primary border-primary">
+                            <i class="fas fa-truck text-primary"></i>
+                          </div>
+                        </div>
+                        <div class="col-8 col-stats">
+                          <div class="numbers">
+                            <p class="card-category">Est. Delivery</p>
+                            <h4 class="card-title">{{est_dlvry}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                  <div class="card card-stats card-round">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="icon-big text-center text-secondary border-secondary">
+                            <i class="far fa-calendar-check text-secondary"></i>
+                          </div>
+                        </div>
+                        <div class="col-8 col-stats">
+                          <div class="numbers">
+                            <p class="card-category">Mfg. Lead Time</p>
+                            <h4 class="card-title">{{LeadTme}} Weeks</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ----------------------Timeline and status -->
+
+          <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Timeline and Status</h4>
+                            <p class="mb-0 subtitle"></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="progress" style="height:40px;">
+                                <div class="progress-bar bg-info progress-bar-striped" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: {{est_deliver_time_today}}%;" role="progressbar">
+                                    <span class="sr-only">{{remaining_time_in_days}}</span>
+                                    <h4 class="font-weight-bold text-dark"> approx. {{remaining_time_in_days}} weeks remaining</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-2 mt-2">
+                <div class="col-lg-6 col-md-6 colsm-6 col-xs-6 mt-2">
+                  {% if order_count>1 %}
+
+                  <form method="POST" action="/search_by_linked_po/{{po_no}}_{{NexusId}}">
+                      <div class="form-group text-left">
+                          <button type="Submit" class="btn btn-light btn-sm col-lg-4 col-md-4 col-sm-12 col-xs-12">Linked PO &nbsp;&nbsp;&nbsp;<span class="badge badge-rounded badge-dark">{{order_count}}</span> &nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                      </div>
+                  </form>
+  
+                  {% elif order_count<=1 %}
+                  <div class="form-group text-left">
+                      <button type="" class="btn btn-light btn-sm col-lg-4 col-md-4 col-sm-12 col-xs-12">No Linked PO &nbsp;&nbsp;&nbsp;
+                        <span class="badge badge-rounded badge-outline-light">{{order_count - 1}}</span>
+                      </button>
+                  </div>
+  
+                  {% endif %}
+
+                  
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
+                  <form method="GET" action="/wf_communication_log/{{NexusId}}_{{po_no}}_{{workfl_name}}">
+                    <div class="form-group text-right">
+                      <button type="Submit" class="btn btn-light btn-sm col-lg-2 col-md-2 col-sm-12 col-xs-12">Logbook<span class="badge badge-rounded badge-outline-light">&nbsp;</span></button>
+                    </div>
+                  </form>
+                </div>
+                
+            </div>
+
+
+             
+              
+              
+           
+
+
+
+            <!-- -----------------------------------Edit order details -->
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Edit Order Details</div>
+                    </div>
+                    <div class="card-body">
+                        <h5>Order ID : {{NexusId}}</h5>
+
+                      <div class="basic-form row">
+                        <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="/update_WForder/{{NexusId}}" id="" name="wform" >
+                            {{form.csrf_token}}
+                            <fieldset class="row sec1">
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.j_name(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.po_no(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.or_date(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.user_type(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                    {{form.co_fname(onkeypress="return alphabet(event);", class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                    {{form.co_lname(onkeypress="return alphabet(event);", class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                    {{form.co_mo_num(onkeypress="return isNumberKey(event);", class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.co_email(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.address(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.ci_ty(class=formclass)}}
+                                </div>
+
+                                <!-- ============================================================ -->
+                                <div  id = "stateCheckBox"  class="form-group col-lg-4 col-md-6 mb-2">
+                                  
+                                  <div class="row">
+                                    <div class="col-auto">
+                                      <div class="form-check">
+                                        <label class="form-check-label">
+                                          {{form.country_2(class="form-check-input")}}
+                                          <span class="form-check-sign">US</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div class="col-auto">
+                                      <div class="form-check">
+                                        <label class="form-check-label">
+                                          {{form.country_1(class="form-check-input")}}
+                                          <span class="form-check-sign">Canada</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                    
+                                   
+                                  </div>
+                                </div>
+                                <!-- ============================================================ -->
+
+                                <!-- <div id = "stateCheckBox" class="form-group col-lg-4 col-md-6 ">
+                                  <div class="row">
+                                    <div class="form-check d-inline col-lg-6">
+                                      <label class="form-check-label">
+                                        {{form.country_2(class="form-check-input")}}
+                                        <span class="form-check-sign">US</span>
+                                      </label>
+                                    </div>
+                                    <div class="form-check d-inline col-lg-6">
+                                      <label class="form-check-label">
+                                        {{form.country_1(class="form-check-input")}}
+                                        <span class="form-check-sign">Canada</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div> -->
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2" id="uSstates">
+
+                                    {{form.us_States(class=formclass)}}
+                                </div>
+                                 <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2" id="caNstates" >
+
+                                    {{form.ca_States(class=formclass)}}
+
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                    {{form.zip_code(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.br_and(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.wf_type(class=formclass)}}
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+
+                                    {{form.mdl(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12  mb-2">
+
+                                    {{form.siz(class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                    {{form.or_price(onkeypress="return isDecimalKey(event)", class=formclass)}}
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                    {{form.or_cost(onkeypress="return isDecimalKey(event);", class=formclass)}}
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12  mb-2">
+
+                                    {{form.o_notes(class=formclass)}}
+                                </div>
+                            </fieldset>
+                        <div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+                            <button type="Submit" class="btn btn-primary btn-sm">Update</button>
+
+                            <a href="{{url_for('WF_orderWrapper')}}" method="GET" class="btn btn-dark btn-sm"><i
+                                class="fa fa-arrow-left color-muted"></i> &nbsp;Go Back</a>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+            <!-- Change Manufacturig Lead time -->
+            <div class="row">
+              <div class="col-md-12 col-lg-12">
+                  <div class="card">
+                      <div class="card-header">
+                        <div class="card-title">Change Manufacturing Lead Time</div>
+                      </div>
+
+                      <div class="card-body">
+                        <div class="basic-form row">
+                          {% for t in orRecs %}
+                          <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="/update_wflead/{{NexusId}}/{{OrderDate}}/{{BufferTime}}/{{t['total_lead_time']}}"id="ascf" name="wform">
+                              {{form.csrf_token}}
+                              <fieldset class="sec1">
+                                  <label class="pl-0 ml-0 text-lightGray"><em>Current Lead Time (in weeks): <strong>{{t['total_lead_time']}}</strong></em></label>
+                                  <div class="row">
+                                      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                        {{form.cal_wflead_type(class=formclass)}} 
+                                      </div>
+  
+                                      <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                          {{form.totl_lt(onkeypress="return isNumberKey(event);",class=formclass)}}     
+                                      </div>
+                                  
+                                  </div>
+                              </fieldset>
+                              <fieldset class="">
+                                  <div class="row">
+                                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                          {{form.leadtm_reason(class=formclass)}}       
+                                      </div>
+                                  </div>
+                              </fieldset>
+                          <div class="form-group col-lg-12 text-left mt-2 mb-2 pl-0">
+                              <button type="Submit" class="btn btn-primary btn-sm">Update</button>
+                          </div>
+                      </form>
+                      {% endfor %}
+                      </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+
+            <!-- -------------Change Dealer Buffer Time -->
+            <div class="row">
+              <div class="col-md-12 col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">Change Dealer Buffer Time</div>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="basic-form row">
+                      {% for t in orRecs %}
+                      <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="/update_WFbuffer/{{NexusId}}/{{OrderDate}}/{{BufferTime}}/{{t['total_lead_time']}}" id="ascf" name="wform">
+                          {{form.csrf_token}}
+                          <fieldset class="sec1">
+                              <label class="pl-0 ml-0 text-lightGray"><em>Current Buffer Time (in weeks): <strong>{{t['dealer_buffer_time']}}</strong></em></label>
+                              <div class="row">
+                                  <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                      {{form.cal_WFbuffer_type(class=formclass)}}
+                                  </div>
+
+                                  <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                      {{form.delr_bfr_tm(onkeypress="return isNumberKey(event);",class=formclass)}}    
+                                  </div>  
+                              </div>
+                          </fieldset>
+                          <fieldset class="">
+                              <div class="row">
+                                  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+                                      {{form.bfrtm_reason(class=formclass)}}       
+                                  </div>
+                              </div>
+                          </fieldset>
+                          <div class="form-group col-lg-12 text-left mt-2 mb-2 pl-0">
+                            <button type="Submit" class="btn btn-primary btn-sm">Update</button>
+                          </div>
+                      </form>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- ---------------Progree Timeline -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Progress Timeline</div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="basic-form">
+                              {% for a in orRecs %}
+                              {{a['relationship_number']}}
+                              <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="/update_wf_timeline/{{NexusId}}/{{a['work_flow_name']}}/{{a['po_number']}}/{{final_stage}}/{{a['relationship_number']}}" id="ascf" name="wform">
+                                  <div class="row">
+                                      <label class="col-lg-12 mt-1 text-lightGray ml-0 pl-0"><em>Work Flow Type: <strong>{{a['work_flow_name']}}</strong></em></label>
+                                      <div class="form-group col-lg-8 col-md-6 col-sm-12 col-xs-12 mb-2 ml-0 pl-0">
+                                        {{form.pgrs_stage_name(class=formclass)}}
+                                      </div>
+                                      <div class="form-group col-lg-4 text-left mb-2 ml-0 pl-0">
+                                        <button id="testclick" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Update</button>
+                                      </div>
+
+
+                                  </div>
+
+                                  
+
+                                   
+                                    {{form.csrf_token}}
+                                    <div id="selectedItem" class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 d-none">
+                                        {{form.pgrs_stage_name(class=formclass)}}
+                                    </div>
+                                    <div id="myModal" class="modal" role="dialog">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h3 class="modal-title">Progress Timeline</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <h4 class="">You are about to update the Order Status</h4>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button Submit" class="btn btn-primary btn-sm">Confirm</button>
+                                            <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+        
+                                  </form>
+
+                                <div class="card border">
+                                    <div class="card-header">
+                                      <div class="card-title">Current Stage</div>
+                                    </div>
+                                    <div class="card-body">
+                                      <ol class="activity-feed">
+                                        {% for n in range(wfl_stages | length) %}
+                                        
+    
+                                          {% if n | int < progress_stage_number | int %}
+                                          <li class="feed-item feed-item-success text-decoration-none">
+                                            <span class="text"><a href="#">{{wfl_stages[n]}}</a></span>                                
+                                          </li>
+                                        {% elif n | int == progress_stage_number | int %}
+                                          <li class="feed-item feed-item-primary text-decoration-none font-weight-bold">
+                                            <span class="text"><a href="#">{{wfl_stages[n]}}</a></span>                                
+                                          </li>
+                                          
+                                        {% elif n | int > progress_stage_number | int %}
+                                          <li class="feed-item feed-item-warning text-decoration-none">
+                                            <!-- <time class="date" datetime="9-21">Sep 21</time> -->
+                                            <span class="text"><a href="#">{{wfl_stages[n]}}</a></span>
+                                          </li>
+    
+    
+                                          <!-- <div class="timeline-badge warning"></div>
+                                          <a class="timeline-panel text-muted" href="#">
+                                            <span class="text"><b>{{wfl_stages[n]}}</b></span>
+                                          </a> -->
+                                        
+                                          {% endif %}
+                  
+                                        
+                                        {% endfor %}
+                              
+                                      </ol>
+                                    </div>
+                                </div>
+
+                                   
+
+                                  <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                </div>
+                                <div class="ps__rail-y" style="top: 0px; min-height: 150px; height: auto; right: 0px;">
+                                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                                </div>
+
+                              {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- ----------------------------Preference Type For Reply Back -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">
+                      Preference Type For Reply Back
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="basic-form row">
+                      <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2 " method="POST" action="/update_wf_preference/{{NexusId}}" id="ascf" name="wform">
+                          {{form.csrf_token}}
+                          <fieldset class="sec1">
+                            <div class="row">
+                              <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                  {{form.pre_ference(class=formclass)}}
+                              </div>
+
+                              <div class="form-group col-lg-12 text-left mb-2">
+                                <button type="Submit" class="btn btn-primary btn-sm">Update</button>
+                            </div>
+                          </div>
+                      </fieldset>
+                      
+                    </form>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          <!-- -----------------------------------------------------content area -->
+
+
+
+
+      </div>
+  </div>
+</div>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script> -->
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

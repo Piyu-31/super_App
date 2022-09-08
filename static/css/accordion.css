@@ -1,0 +1,178 @@
+
+.accordion__item {
+    margin-bottom: 1.25rem;
+  }
+  
+  .accordion__header {
+    padding: 0.9375rem;
+    /* border: 1px solid #eaeaea; */
+    background: #f1efef;
+    cursor: pointer;
+    position: relative;
+    color: #333;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  [data-theme-version="dark"] .accordion__header {
+    color: #fff;
+    border-color: #424d63;
+  }
+  .accordion__header--indicator {
+    font-family: "themify";
+    position: absolute;
+    right: 1.5625rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .accordion__header--indicator.indicator_bordered {
+    display: inline-block;
+    width: 25px;
+    text-align: center;
+    height: 25px;
+    border: 1px solid #eaeaea;
+    border-radius: 50%;
+    line-height: 25px;
+  }
+  .accordion__header:not(.collapsed) .accordion__header--indicator::before {
+    content: "\2212";
+  }
+  .accordion__header:not(.collapsed)
+    .accordion__header--indicator.style_two::before {
+    content: "\e648";
+  }
+  .accordion__header.collapsed .accordion__header--indicator::before {
+    content: "\002b";
+  }
+  .accordion__header.collapsed .accordion__header--indicator.style_two::before {
+    content: "\e64b";
+  }
+  
+  .accordion__body--text {
+    padding: 0.9375rem 0;
+  }
+  
+  .accordion-bordered .accordion__body {
+    border: 1px solid #eaeaea;
+    border-top: none;
+  }
+   
+  
+  .accordion-no-gutter .accordion__item {
+    margin-bottom: 0;
+  }
+  .accordion-no-gutter .accordion__item .accordion__header.collapsed {
+    border-bottom: none;
+  }
+  .accordion-no-gutter .accordion__item:last-child .accordion__header {
+    border-bottom: 1px solid #eaeaea;
+  }
+   
+  
+  .accordion-no-gutter.accordion__bordered
+    .accordion__item:not(:last-child)
+    .accordion__body {
+    border-bottom: none;
+  }
+  
+  .accordion-left-indicator .accordion__header--text {
+    padding-left: 2.5rem;
+  }
+  
+  .accordion-left-indicator .accordion__header--indicator {
+    right: auto;
+    left: 1.5625rem;
+  }
+  
+  .accordion-with-icon .accordion__header--text {
+    padding-left: 2.5rem;
+  }
+  
+  .accordion-with-icon .accordion__header--icon {
+    position: absolute;
+    right: auto;
+    left: 1.5625rem;
+    font-family: "themify";
+  }
+  .accordion-with-icon .accordion__header--icon::before {
+    content: "\e645";
+  }
+  
+  .accordion-header-bg .accordion__header {
+    background-color: #f2f2f2;
+  }
+   
+  .accordion-header-bg .accordion__header--primary {
+    background-color: #0087fc;
+    color: #fff;
+  }
+  .accordion-header-bg .accordion__header--info {
+    background-color: #50e3c2;
+    color: #fff;
+  }
+  .accordion-header-bg .accordion__header--success {
+    background-color: #7ed321;
+    color: #fff;
+  }
+  
+  .accordion-header-bg.accordion-no-gutter .accordion__header {
+    border-color: transparent;
+  }
+  
+  .accordion-solid-bg .accordion__header {
+    border-color: transparent;
+    background-color: #f2f2f2;
+  }
+   
+  
+  .accordion-solid-bg .accordion__body {
+    border-color: transparent;
+    background-color: #f2f2f2;
+  }
+  [data-theme-version="dark"] .accordion-solid-bg .accordion__body {
+    background-color: #2a2c32;
+  }
+  
+  .accordion-active-header .accordion__header:not(.collapsed) {
+    background-color: #bdbdc7;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .accordion-header-shadow .accordion__header {
+    border: none;
+    box-shadow: 0 0 0.9375rem -3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .accordion-rounded-stylish .accordion__header {
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
+  }
+  
+  .accordion-rounded-stylish .accordion__body {
+    border-bottom-left-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+  }
+  
+  .accordion-rounded .accordion__header {
+    border-radius: 0.3125rem;
+  }
+  
+  .accordion-gradient .accordion__header {
+    color: #fff;
+    background-image: linear-gradient(
+      to right,
+      rgba(186, 1, 181, 0.85) 0%,
+      rgba(103, 25, 255, 0.85) 100%
+    );
+    border-color: transparent;
+  }
+  
+  .accordion-gradient .accordion__body {
+    color: #fff;
+    background-image: linear-gradient(
+      to right,
+      rgba(186, 1, 181, 0.85) 0%,
+      rgba(103, 25, 255, 0.85) 100%
+    );
+    border-color: transparent;
+  }

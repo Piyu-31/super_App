@@ -1,0 +1,383 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block consumer_formTemp %}
+
+
+<link rel="stylesheet" href="../static/css/accordion.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+
+          <!-- --------------------------------------------breadcrump -->
+          <div class="page-header">
+              <h4 class="page-title">Consumer Details</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Consumer Details</a>
+                </li>
+              </ul>
+
+          </div>
+          <!-- --------------------------------------------breadcrump -->
+
+
+          <!-- -----------------------------------------------------content area -->
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Consumer Info</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div id="accordion-nine" class="accordion accordion-active-header">
+                        <div class="accordion__item">
+                            <div class="accordion__header collapsed" data-toggle="collapse"
+                                data-target="#active-header_collapseOne">
+                                <span class="accordion__header--icon"></span>
+                                <span class="accordion__header--text">Create</span>
+                                <span class="accordion__header--indicator"></span>
+                            </div>
+                            <div id="active-header_collapseOne" class="collapse accordion__body"
+                                data-parent="#accordion-nine">
+                                <div class="accordion__body--text">
+                                    
+                                <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Single Entry</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Bulk Entry</a>
+                                </li>
+                                
+                            </ul>
+
+                             <div class="tab-content tabcontent-border">
+                                <div id="navpills-1" class="tab-pane active">
+                                    <div class="pt-4">
+                                        <!-- <h4>Single Entry</h4> -->
+                                        <div class="basic-form row">
+                                        <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('save_consumer_information')}}" id="" name="wform">
+                                            {{form.csrf_token}}
+
+                                            <fieldset  class="row sec1">
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                              
+                                                {{form.c_user_type(class=formclass)}}
+                                            </div>
+                                            
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                              
+                                                {{form.c_fname(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                              
+                                                {{form.c_lname(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                {{form.c_mobile(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_email(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_dob(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_addrs(class_="form-control form-control-sm")}}
+                                            </div>
+
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_city(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_con(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_state(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                                
+                                                    {{form.c_zip_code(class_="form-control form-control-sm")}}
+                                            </div>
+
+                                            
+                                            <div class="form-group col-lg-12 text-left mt-3">
+                                              <button type="Submit" class="btn btn-primary btn-sm">Submit</button>
+                                          </div>
+                                            </fieldset>
+
+                                              
+                                        </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div id="navpills-2" class="tab-pane">
+                                    <div class="pt-4">
+                                        <!-- <h4>Bulk Entry</h4> -->
+                                        <div class="basic-form row">
+                                            <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('excelReader_Consumer')}}" enctype="multipart/form-data" name="wform">
+                                                {{form_excel.csrf_token}}
+                                                  <div class="row">
+                                                    <div class="form-group col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                      {{form_excel.excelip}}
+                                                  </div>
+                                                  </div>
+                                                    
+                                                
+                                                <div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+                                                    <button type="Submit" class="btn btn-primary btn-sm">Upload</button>
+                                                </div>
+                                                    
+                                                  
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+
+
+
+
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header">
+                        <div class="card-title">Search Block</div>
+                      </div>
+
+                      <div class="card-body">
+                        <div class="form-row">
+                          <div class="form-group col-md-3 mb-2">
+                              <div class="basic-form">
+                                  <form class="mr-3" method="POST" action="/search_cons_records/1">
+                                    {{form_fname.csrf_token}}
+                                <div class="row">
+                                  <div class="input-group ml-3 mr-1">
+                                      {{form_fname.searchbyFName(class_="form-control form-control-sm")}}
+                                    <div class="input-group-append">
+                                      <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group col-md-3 mb-2">
+                              <div class="basic-form">
+                              <form class="mr-3" method="POST" action="/search_cons_records/2">
+                                  {{form_mobile.csrf_token}}
+                                <div class="row">
+                                  <div class="input-group ml-3 mr-1">
+                                  {{form_mobile.searchbyMobile(class_="form-control form-control-sm")}}
+                                    <div class="input-group-append">
+                                      <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group col-md-3 mb-2">
+                              <div class="basic-form">
+                              <form class="mr-3" method="POST" action="/search_cons_records/3">
+                                  {{form_city.csrf_token}}
+                                <div class="row">
+                                  <div class="input-group ml-3 mr-1">
+                                    {{form_city.searchbyCity(class_="form-control form-control-sm")}}
+                                    <div class="input-group-append">
+                                      <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              </div>
+                          </div>
+
+
+                          <div class="form-group col-md-3 mb-2">
+                              <div class="basic-form">
+                              <form class="mr-3" method="POST" action="/search_cons_records/4">
+                                 {{form_state.csrf_token}}
+                                <div class="row">
+                                  <div class="input-group ml-3 mr-1">
+                                  {{form_state.searchbyState(class_="form-control form-control-sm")}}
+                                    <div class="input-group-append">
+                                      <button type="submit" class="btn btn-gray btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              </div>
+                          </div>
+
+                          <div class="form-row ml-1">
+                            <div class="form-group col-md-3">
+                             <div class="basic-form">
+                                 <a href="{{url_for('consumerWrapper')}}" method="GET" class="btn btn-primary btn-sm">All</a>
+                             </div>
+                         </div>
+                     </div>
+                      
+
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header">
+                          <div class="card-title">Consumer Details</div>
+                      </div>
+
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table header-border table-hover vertical-middle table-responsive-sm">
+                              <thead class="thead-light">
+                                  <tr class="text-center">
+                                      <th scope="col">First Name</th>
+                                      <th scope="col">Last Name</th>
+                                      <th scope="col">Mobile Number</th>
+                                      <th scope="col">Email</th>
+                                      <th scope="col">Date of Birth</th>
+                                      <th scope="col">Address</th>
+                                      <th scope="col">City</th>
+                                      <th scope="col">State</th>
+                                      <th scope="col">Country</th>
+                                      <th scope="col">Action</th>
+                                  </tr>
+                              </thead>
+
+                              <tbody>
+                                  {% if consumerlist %}
+                                  {% for k in consumerlist %}
+                                  <tr class="text-center">
+                                      
+                                      <td>{{k['consumer_first_name']}}</td>
+                                      <td>{{k['consumer_last_name']}}</td>
+                                      <td>{{k['consumer_mobile_number']}}</td>
+                                      <td>{{k['consumer_email']}}</td>
+                                      <td>{{k['consumer_date_of_birth']}}</td>
+                                      <td>{{k['consumer_address']}}</td>
+                                      <td>{{k['consumer_city']}}</td>
+                                      <td>{{k['consumer_state']}}</td>
+                                      <td>{{k['consumer_country']}}</td>
+                                      <td>
+                                          <div class="sweetalert row text-right">
+                                              <span>
+                                                  <a href="/edit_consumer_data/{{k['consumer_id']}}" method="POST" class="ml-3"
+                                                      data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                          class="fa fa-pencil color-muted"></i></a>
+
+                                                  <a href="#" data-toggle="modal" data-target="#collapse_deleteConsumer{{k['consumer_id']}}"><i class="fa fa-close text-danger" data-toggle="tooltip" data-placement="top" title="Delete"></i></a>
+
+                                                  <div class="modal fade" id="collapse_deleteConsumer{{k['consumer_id']}}" tabindex="-1"
+                                                      role="dialog" aria-labelledby="exampleModalLabel"
+                                                      aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                          <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                  <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                      </h5>
+                                                                  <button type="button" class="close"
+                                                                      data-dismiss="modal" aria-label="Close">
+                                                                      <span aria-hidden="true">&times;</span>
+                                                                  </button>
+                                                              </div>
+                                                              <div class="modal-body text-left">
+                                                                  Are You Sure You Want to Delete this Consumer..
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                              
+                                                                  <a href="/delConsumer/{{k['consumer_id']}}/{{k['consumer_mobile_number']}}" method="GET"
+                                                                      class="btn btn-danger btn-sm">Confirm</a>
+                                                                  
+                                                                  <button type="button" class="btn btn-dark btn-sm"data-dismiss="modal">Close</button>
+                                                                  
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <!-- /# card -->
+                                              </span>
+                                          </div>
+                                      </td>
+                                      
+                                  </tr>
+                                  {% endfor %}
+                                  {% endif %}
+                              </tbody>
+
+                             
+                          </table>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- -----------------------------------------------------content area -->
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+{% endblock %}

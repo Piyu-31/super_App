@@ -1,0 +1,289 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block search_formTemp %}
+
+<div class="main-panel">
+  <div class="content">
+      <div class="page-inner">
+          <div class="page-header">
+              <h4 class="page-title">Search</h4>
+
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="#">
+                    <i class="flaticon-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Communication & Status</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Search</a>
+                </li>
+                <li class="separator">
+                  <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Progress Timeline</a>
+                </li>
+              </ul>
+
+          </div>
+
+          <div class="row">
+              <div class="col-md-12 ml-auto mr-auto">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Search Details</div>
+                    </div>
+
+                    <div class="card-body">
+                      <div class="table-responsive">
+                      <table class="table table-hover table-head-bg-gray table-responsive-sm">
+                        <thead>
+                          <tr class="text-left">
+                                <th>
+                                    <!-- <input type="checkbox" id="check_all" name="check_all" onclick="checkAll(this)" > -->
+
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="check_all" name="check_all" onclick="checkAll(this)" value="" class="form-check-input" >                                        
+                                        <span class="form-check-sign"></span>
+                                      </label>
+                                    
+                                  </div>
+                                </th>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">PO #</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Name/Company</th>
+                                <th scope="col">Mobile #</th>
+                                <th scope="col">Current Stage</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order_time_line_data">
+                          	{{form_checkbox_pgrstmln.csrf_token}}
+                            {% if orderInfoList %}
+                            {% for d,chkbx in form_info %}
+                          <tr class="text-left">
+                            <td>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    {{chkbx(id=d['nexus_id'],onclick="manageCheckedItems(this)")}}
+                                    <span class="form-check-sign"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{d["nexus_id"]}}</td>
+                            <td>{{d["po_number"]}}</td>
+                            <td>{{d["order_date"]}}</td>
+                            <td>{{d['consumer_first_name']}}</td>
+                            <td>{{d['consumer_mobile_number']}}</td>
+                            <td>{{d['progress_timeline']}}</td>
+                              
+                            <td class="text-right">
+
+                                <span>
+                                    <a href="/editWForder/{{d['nexus_id']}}" method="POST"
+                                    class="ml-5 pl-5" data-toggle="tooltip" data-placement="top"
+                                    title="Edit"><i class="fa fa-pencil color-muted"></i></a>
+                                            
+                                    <a href="/wf_communication_log/{{d['nexus_id']}}_{{d['po_number']}}_{{d['work_flow_name']}}" method="POST" class=""
+                                    data-toggle="tooltip" data-placement="top" title="Logbook"><i class="fa fa-book color-info"></i></a>
+
+                                 </span>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                    
+                  </div>
+
+                   
+              </div>
+          </div>
+
+
+          <div class="row">
+                <div class="col-md-12 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Progress Timeline</div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <div class="row">
+                                    <label class="col-lg-12 mt-1 text-lightGray"><em>Work Flow Type: <strong></strong></em></label>
+                                    <div id="divOrderIds" class="input-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                        {{form_blk_pgrstm.cstm_nex_ids(class=formclass)}}
+                                    </div>
+                                    <div class="input-group col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                        {{form_blk_pgrstm.pgrs_stage_name(class=formclass)}}
+                                    </div>
+                                    <div class="form-group col-lg-4 text-left">
+                                        <button id="testclick" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Update</button>
+                                    </div> 
+                                </div>
+
+                                <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2 ml-3" method="POST" action="/bulk_progress_time_line_update/{{po_no}}/{{nexus_id}}" id="ascf" name="wform">
+                                {{form_blk_pgrstm.csrf_token}}
+                                    <div id="divOrderIdsForm" class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 d-none">
+                                        {{form_blk_pgrstm.cstm_nex_ids(class=formclass)}}
+                                    </div>
+                                
+                                    <div id="selectedItem" class="input-group col-lg-8 col-md-6 col-sm-12 col-xs-12 d-none">
+                                        {{form_blk_pgrstm.pgrs_stage_name(class=formclass)}}
+                                    </div>
+                                    <div id="myModal" class="modal" role="dialog">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h3 class="modal-title">Progress Timeline</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <h4 class="">You are about to update the Order Status</h4>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button Submit" class="btn nexus_button btn-primary btn-sm">Confirm</button>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+
+
+      </div>
+  </div>
+</div>
+
+<script src="../static/assets/js/core/jquery.3.2.1.min.js"></script>
+<script>
+    red_button_ids = []
+    function manageCheckedItems(el) {
+       var txt = document.getElementById(el.id);
+       var cstm_txt = document.getElementById('cstm_nex_ids');
+       /*var cstm_lead_txt = document.getElementById('cst_leadtm_ids');
+       var cstm_bfr_txt = document.getElementById('cstm_bfrtm_ids');*/
+
+       
+
+        if(el.checked) {
+            red_button_ids.push(el.id);
+            cstm_txt.value = red_button_ids;
+           /* cstm_lead_txt.value = red_button_ids;
+            cstm_bfr_txt.value = red_button_ids;*/
+
+        }
+        else{
+            if (red_button_ids.includes(el.id)){
+                const id_index = red_button_ids.indexOf(el.id);
+                if (id_index > -1) {
+                    red_button_ids.splice(id_index, 1);
+                }
+                cstm_txt.value = red_button_ids;
+               /* cstm_lead_txt.value = red_button_ids;
+                cstm_bfr_txt.value = red_button_ids;*/
+            }
+        }
+        var ids = document.getElementById('order_time_line_data').getElementsByTagName('input');
+        var new_ids = Object.entries(ids);
+
+        if (red_button_ids.length < (new_ids.length-1)){
+            var selectAll = document.getElementById('check_all');
+            selectAll.checked = false;
+
+        }
+
+    }
+
+    function checkAll(obj){
+        red_button_ids = [];
+        var ids = document.getElementById('order_time_line_data').getElementsByTagName('input');
+        var cstm_txt = document.getElementById('cstm_nex_ids');
+        /*var cstm_lead_txt = document.getElementById('cst_leadtm_ids');
+        var cstm_bfr_txt = document.getElementById('cstm_bfrtm_ids');*/
+
+        
+        if(obj.checked) {
+            var ids = document.getElementById('order_time_line_data').getElementsByTagName('input');
+            
+            var new_ids = Object.entries(ids);
+            
+            for (let i = 1; i < new_ids.length; ++i) {
+                red_button_ids.push(new_ids[i][1].id);
+
+                if (document.getElementById(new_ids[i][1].id).checked) {
+
+                    document.getElementById(new_ids[i][1].id).checked = false;
+
+                }
+                document.getElementById(new_ids[i][1].id).checked = true;
+
+            }
+            cstm_txt.value = red_button_ids;
+            /*cstm_lead_txt.value = red_button_ids;
+            cstm_bfr_txt.value = red_button_ids;*/
+
+        }
+        else{
+            red_button_ids = [];
+            cstm_txt.value = red_button_ids;
+            /*cstm_lead_txt.value = red_button_ids;
+            cstm_bfr_txt.value = red_button_ids;*/
+            
+            var ids = document.getElementById('order_time_line_data').getElementsByTagName('input');
+            var new_ids = Object.entries(ids);
+
+            for (let i = 1; i < new_ids.length; ++i) {
+                
+                document.getElementById(new_ids[i][1].id).checked = false;
+
+            }
+
+
+        }
+
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#testclick').on('click', function() {
+            var selectedval = $('#divOrderIds input[type="text"]').val();
+            console.log(selectedval)
+            $('#divOrderIdsForm input[type="text"]').val(selectedval)
+        });
+
+        $(".row select[name='pgrs_stage_name']").change(function() {
+            var selectedVal = $(this).val();
+            $("#selectedItem  select[name='pgrs_stage_name']").val(selectedVal);
+        });
+    });
+</script>
+
+
+{% endblock %}

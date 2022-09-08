@@ -1,0 +1,110 @@
+{% extends "index.html" %}
+{% set userNameCurrent=user %}
+{% block vendor_editTemp %}
+
+<div class="main-panel">
+	<div class="content">
+		<div class="page-inner">
+			<!-- --------------------------------------------breadcrump -->
+			<div class="page-header">
+				<h4 class="page-title">Supplier Edit</h4>
+
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Communication & Status</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Supplier Database</a>
+					</li>
+
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Supplier Edit</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 ml-auto mr-auto">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Supplier Edit</div>
+						</div>
+
+						<div class="card-body">
+							<div class="basic-form">
+								<form class="" method="POST" action="/update_vendor_info/{{vendor_id}}"id="ascf" name="wform">
+									{{form.csrf_token}}
+									<fieldset class="sec1 row">
+										<div class="input-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+											{{form.v_name(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-6 col-xs-12 mb-2">
+											{{form.v_inds(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_cname(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_cnumber(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_email(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_addrs(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_city(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_con(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12 mb-2">
+											{{form.v_zip(class=formclass)}}
+										</div>
+
+										<div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+											{{form.v_desc(class=formclass)}}
+										</div>
+
+									</fieldset>
+
+									<div class="form-group col-lg-12 text-left mb-2 mt-2 pl-0">
+										<button type="Submit" class="btn btn-primary btn-sm">Update</button>
+										<a href="{{url_for('vendorWrapper')}}" method="GET" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left color-muted"></i> &nbsp;Go Back</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
